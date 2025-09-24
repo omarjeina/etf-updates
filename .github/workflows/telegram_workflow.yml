@@ -1,0 +1,42 @@
+name: Telegram Updates
+
+on:
+  schedule:
+    # Runs 6 times a day: 6 AM, 10 AM, 2 PM, 6 PM, 10 PM, 2 AM (UTC)
+    # Adjust for your timezone - Sarajevo is UTC+1 (UTC+2 in summer)
+    - cron: '0 5,9,13,17,21,1 * * *'  # 6 AM, 10 AM, 2 PM, 6 PM, 10 PM, 2 AM Sarajevo time
+  workflow_dispatch:  # Manual trigger for testing
+
+jobs:
+  scrape-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        pip install requests beautifulsoup4
+        
+    - name: Run college news scraper
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        python telegram_updates.py
+        
+    - name: Commit and push updated post files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add etf_posts.json dsai_posts.json
+        git diff --staged --quiet || git commit -m "Update stored posts - $(date)"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
