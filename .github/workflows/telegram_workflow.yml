@@ -10,7 +10,7 @@ on:
     - cron: '0 14 * * *'   # 4 PM Sarajevo (2 PM UTC)
     - cron: '0 16 * * *'   # 6 PM Sarajevo (4 PM UTC)
     - cron: '0 18 * * *'   # 8 PM Sarajevo (6 PM UTC)
-    - cron: '15 20 * * *'
+    - cron: '30 20 * * *'  # 10:30 PM Sarajevo (8:30 PM UTC)
   workflow_dispatch:  # Manual trigger for testing
   push:               # Runs automatically when you push code
     branches: [ main, master ]  # Only on main/master branch
