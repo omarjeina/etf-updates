@@ -6,6 +6,8 @@ on:
     # Adjust for your timezone - Sarajevo is UTC+1 (UTC+2 in summer)
     - cron: '0 5,9,13,17,21,1 * * *'  # 6 AM, 10 AM, 2 PM, 6 PM, 10 PM, 2 AM Sarajevo time
   workflow_dispatch:  # Manual trigger for testing
+  push:               # Runs automatically when you push code
+    branches: [ main, master ]  # Only on main/master branch
 
 jobs:
   scrape-news:
