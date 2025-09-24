@@ -262,10 +262,10 @@ def main():
     else:
         print("✅ Scraper completed! No new posts found")
         
-        # Send a daily summary if no new posts (optional)
         current_time = datetime.now()
-        if current_time.hour == 20 and current_time.minute >= 30:  # 10:30 PM UTC = 10:30 PM Sarajevo (UTC+2)
-            summary = f"📊 <b>Daily Summary</b>\n\n🎓 ETF: {len(current_etf_posts)} announcements tracked\n🤖 DSAI: {len(current_dsai_posts)} news items tracked\n\n🔍 No new posts since last check\n🕐 <i>{datetime.now().strftime('%d/%m/%Y %H:%M')}</i>"
+        if current_time.hour == 20 and current_time.minute >= 35:  # 8:35-8:45 PM UTC window
+            print("📊 Sending daily summary (10:40 PM Sarajevo run)...")
+            summary = f"📊 <b>Daily Summary - End of Day</b>\n\n🎓 ETF: {len(current_etf_posts)} announcements tracked\n🤖 DSAI: {len(current_dsai_posts)} news items tracked\n\n🔍 No new posts since last check\n🕐 <i>Daily summary at {datetime.now().strftime('%d/%m/%Y %H:%M')} UTC</i>"
             send_telegram_message(bot_token, chat_id, summary)
 
 if __name__ == "__main__":
