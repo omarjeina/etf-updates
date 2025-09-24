@@ -17,7 +17,7 @@ def send_discord_message(webhook_url, message):
 
 def main():
     # Get webhook URL from environment variable
-    webhook_url = os.environ.get('DISCORD_WEBHOOK_URL')
+    webhook_url = os.environ.get('TEST_DISCORD_WEBHOOK_URL')
     
     if not webhook_url:
         print("❌ DISCORD_WEBHOOK_URL environment variable not found!")
