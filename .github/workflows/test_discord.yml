@@ -1,4 +1,4 @@
-name: Test Discord Webhook
+name: Test Telegram Webhook
 
 on:
   workflow_dispatch:  # Manual trigger - you can run this anytime
@@ -21,8 +21,9 @@ jobs:
       run: |
         pip install requests
         
-    - name: Test Discord webhook
+    - name: Test Telegram bot
       env:
-        TEST_DISCORD_WEBHOOK_URL: ${{ secrets.TEST_DISCORD_WEBHOOK_URL }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        python test_discord.py
+        python test_telegram.py
