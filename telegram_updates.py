@@ -173,40 +173,40 @@ def main():
         print("❌ Missing Telegram credentials!")
         return
     
-    # Special check for September 24, 2025 - send current posts summary
-    today = datetime.now().strftime('%Y-%m-%d')
-    if today == '2025-09-24':
-        print("🎯 Special date detected! Sending current posts summary...")
+    # # Special check for September 24, 2025 - send current posts summary
+    # today = datetime.now().strftime('%Y-%m-%d')
+    # if today == '2025-09-24':
+    #     print("🎯 Special date detected! Sending current posts summary...")
         
-        # Scrape current posts
-        current_etf_posts = scrape_etf_news()
-        current_dsai_posts = scrape_dsai_news()
+    #     # Scrape current posts
+    #     current_etf_posts = scrape_etf_news()
+    #     current_dsai_posts = scrape_dsai_news()
         
-        # Send summary of current posts (not as "new" posts)
-        if current_etf_posts or current_dsai_posts:
-            summary_message = f"🧪 <b>Test Summary - September 24, 2025</b>\n\n"
+    #     # Send summary of current posts (not as "new" posts)
+    #     if current_etf_posts or current_dsai_posts:
+    #         summary_message = f"🧪 <b>Test Summary - September 24, 2025</b>\n\n"
             
-            if current_etf_posts:
-                summary_message += f"🎓 <b>Current ETF Announcements ({len(current_etf_posts)}):</b>\n"
-                for i, post in enumerate(current_etf_posts, 1):
-                    title = post['title'][:60] + "..." if len(post['title']) > 60 else post['title']
-                    summary_message += f"{i}. <a href='{post['url']}'>{title}</a>\n"
-                summary_message += "\n"
+    #         if current_etf_posts:
+    #             summary_message += f"🎓 <b>Current ETF Announcements ({len(current_etf_posts)}):</b>\n"
+    #             for i, post in enumerate(current_etf_posts, 1):
+    #                 title = post['title'][:60] + "..." if len(post['title']) > 60 else post['title']
+    #                 summary_message += f"{i}. <a href='{post['url']}'>{title}</a>\n"
+    #             summary_message += "\n"
             
-            if current_dsai_posts:
-                summary_message += f"🤖 <b>Current DSAI News ({len(current_dsai_posts)}):</b>\n"
-                for i, post in enumerate(current_dsai_posts, 1):
-                    title = post['title'][:60] + "..." if len(post['title']) > 60 else post['title']
-                    summary_message += f"{i}. <a href='{post['url']}'>{title}</a>\n"
-                summary_message += "\n"
+    #         if current_dsai_posts:
+    #             summary_message += f"🤖 <b>Current DSAI News ({len(current_dsai_posts)}):</b>\n"
+    #             for i, post in enumerate(current_dsai_posts, 1):
+    #                 title = post['title'][:60] + "..." if len(post['title']) > 60 else post['title']
+    #                 summary_message += f"{i}. <a href='{post['url']}'>{title}</a>\n"
+    #             summary_message += "\n"
             
-            summary_message += f"✅ <i>Scraper is working correctly!</i>\n"
-            summary_message += f"🕐 <i>Checked: {datetime.now().strftime('%d/%m/%Y %H:%M')}</i>"
+    #         summary_message += f"✅ <i>Scraper is working correctly!</i>\n"
+    #         summary_message += f"🕐 <i>Checked: {datetime.now().strftime('%d/%m/%Y %H:%M')}</i>"
             
-            if send_telegram_message(bot_token, chat_id, summary_message):
-                print("✅ Special date summary sent!")
+    #         if send_telegram_message(bot_token, chat_id, summary_message):
+    #             print("✅ Special date summary sent!")
         
-        # Continue with normal operation below
+    #     # Continue with normal operation below
     
     # File paths
     etf_file = "etf_posts.json"
@@ -263,9 +263,9 @@ def main():
         print("✅ Scraper completed! No new posts found")
         
         current_time = datetime.now()
-        if current_time.hour == 20 and current_time.minute >= 35:  # 8:35-8:45 PM UTC window
+        if current_time.hour == 20 and current_time.minute >= 0:  # 8:35-8:45 PM UTC window
             print("📊 Sending daily summary (10:40 PM Sarajevo run)...")
-            summary = f"📊 <b>Daily Summary - End of Day</b>\n\n🎓 ETF: {len(current_etf_posts)} announcements tracked\n🤖 DSAI: {len(current_dsai_posts)} news items tracked\n\n🔍 No new posts since last check\n🕐 <i>Daily summary at {datetime.now().strftime('%d/%m/%Y %H:%M')} UTC</i>"
+            summary = f"📊 <b>Daily Summary - End of Day</b>\n\n🎓 ETF: {len(current_etf_posts)} announcements tracked\n🤖 DSAI: {len(current_dsai_posts)} news items tracked\n\n🔍 No new posts since last check\nAlways check site urls just to be on the safe side (this is just a program that sometimes breaks :) )\nhttps://www.etf.unsa.ba/obavjestenja \nhttps://dsai.etf.unsa.ba/news/ \n🕐 <i>Daily summary at {datetime.now().strftime('%d/%m/%Y %H:%M')} UTC</i>"
             send_telegram_message(bot_token, chat_id, summary)
 
 if __name__ == "__main__":
