@@ -233,5 +233,7 @@ def main():
             summary = f"📊 <b>Last check today</b>\n\n🔍 No new posts since last check\n\nAlways check manually to be on a safe side:\n\nhttps://www.etf.unsa.ba/obavjestenja \nhttps://dsai.etf.unsa.ba/news/"
             send_telegram_message(bot_token, chat_id, summary)
 
+# 07/11/2025
+
 if __name__ == "__main__":
     main()
